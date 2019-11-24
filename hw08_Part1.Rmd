@@ -1,0 +1,108 @@
+---
+title: "hw08"
+author: "Bohan Yin"
+date: "11/24/2019"
+output:
+  pdf_document: 
+    toc: yes
+    toc_depth: '3'
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(dplyr)
+library(geonames)
+library(here)
+library(gapminder)
+library(countrycode)
+library(magrittr)
+```
+
+
+
+```{r API key}
+# To run this code in your computer, please register on geonames.org, enable the web service and run this code here: options(geonamesUsername = "your username")
+```
+
+
+```{r readin data, include =FALSE}
+countryInfo <- GNcountryInfo()
+countryInfo %>%
+  as_tibble()
+countryData <- gapminder
+```
+
+```{r data modification, include = FALSE}
+countryInfo %<>% 
+  # unify the country names and continent names
+  mutate(country = countrycode(countryCode, 'iso2c', 'country.name')) %>%
+  mutate(continent = countrycode(country, 'country.name', 'continent'))
+countryInfo
+```
+
+```{r merge data, include = FALSE}
+country_merged <- left_join(countryData, countryInfo, by = c('country','continent')) # I merge both country and continent to reduce unnecessary suffix columns
+```
+
+## 1. Plot a single graph showing the overall trend  
+
+From Figure 1, we can see that the relationship between population density and life expectancy is overall positive. As population density increases, life expectancy increases.
+
+```{r plot one graph,  message = FALSE, warning = FALSE}
+country_merged %<>%
+  # convert chr column to dbl column
+  mutate(areaInSqKm = as.numeric(areaInSqKm)) %>%
+  # calculate population density. We use population data from gapminder because it has different population data of countries on different years, which is more precise for this plot 
+  mutate(pop_density = (pop/areaInSqKm))
+country_merged %>%
+  ggplot(aes(pop_density, lifeExp)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth() +
+  labs(title = 'Figure 1: Relationship between population density and life expectancy',
+       x = 'Population density (per square kilometers)',
+       y = 'Life expectancy') +
+  # scale x axis with log to make the plot more interpretable
+  scale_x_continuous(trans = 'log2')
+```
+
+## 2. Plot a single graph showing the trends by continents  
+
+From Figure 2, we can see that both Asia and Africa show an overall positive relationship betwee population density and life expectancy. Especially Asia presents a more robust positive relationship.
+
+```{r one plot by continents, message = FALSE, warning = FALSE}
+country_merged %>%
+  ggplot(aes(pop_density, lifeExp, color = continent)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth() +
+  labs(title = 'Figure 2: Relationship between population density and life expectancy',
+       x = 'Population density (per square kilometers)',
+       y = 'Life expectancy') +
+  # scale x axis with log to make the plot more interpretable
+  scale_x_continuous(trans = 'log2') +
+  scale_color_brewer(palette = 'RdYlBu')
+```
+
+## 3. Plot multiple graphs showing the trends in different continents with different x scales
+
+From Figure 3 we can see, only Africa and Asia show a positive relationship between population density and life expectancy. Notice that Africa experiences a negative relationship between the two before population density reaches 16/srkm, and after that point it starts to show a positive relationship between population density and life expectancy. Other continents like Americas, Europe, and Oceania do not have an obvious positive relationship between population density and life expectancy.
+
+
+```{r multiple plots, message = FALSE, warning = FALSE}
+country_merged %>%
+  group_by(continent) %>%
+  ggplot(aes(pop_density, lifeExp)) +
+  geom_point(alpha = 0.2) +
+  geom_smooth() +
+  labs(title = 'Figure 3: Relationship between population density and life expectancy (by continents)',
+       x = 'Population density (per square kilometers)',
+       y = 'Life expectancy') +
+  scale_x_continuous(trans = 'log2') +
+  # multiple plots across continents, allowing different x axis scales
+  facet_wrap (~continent, scales = "free_x")
+  
+```
+
+
+
+
