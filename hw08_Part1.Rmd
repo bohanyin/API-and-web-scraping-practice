@@ -103,6 +103,7 @@ country_merged %>%
   
 ```
 
-
-
+```{r include = FALSE}
+devtools::session_info()
+``` 
 
