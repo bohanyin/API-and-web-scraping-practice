@@ -20,7 +20,6 @@ library(magrittr)
 ```
 
 
-
 ```{r API key}
 # To run this code in your computer, please register on geonames.org, enable the web service and run this code here: options(geonamesUsername = "your username")
 ```
@@ -47,7 +46,7 @@ country_merged <- left_join(countryData, countryInfo, by = c('country','continen
 
 ## 1. Plot a single graph showing the overall trend  
 
-From Figure 1, we can see that the relationship between population density and life expectancy is overall positive. As population density increases, life expectancy increases.
+From Figure 1, we can see that the relationship between population density and life expectancy is overall positive. As population density increases, life expectancy increases.  
 
 ```{r plot one graph,  message = FALSE, warning = FALSE}
 country_merged %<>%
@@ -66,9 +65,11 @@ country_merged %>%
   scale_x_continuous(trans = 'log2')
 ```
 
+\pagebreak  
+
 ## 2. Plot a single graph showing the trends by continents  
 
-From Figure 2, we can see that both Asia and Africa show an overall positive relationship betwee population density and life expectancy. Especially Asia presents a more robust positive relationship.
+From Figure 2, we can see that both Asia and Africa show an overall positive relationship betwee population density and life expectancy. Especially Asia presents a more robust positive relationship.  
 
 ```{r one plot by continents, message = FALSE, warning = FALSE}
 country_merged %>%
@@ -82,10 +83,11 @@ country_merged %>%
   scale_x_continuous(trans = 'log2') +
   scale_color_brewer(palette = 'RdYlBu')
 ```
+\pagebreak  
 
 ## 3. Plot multiple graphs showing the trends in different continents with different x scales
 
-From Figure 3 we can see, only Africa and Asia show a positive relationship between population density and life expectancy. Notice that Africa experiences a negative relationship between the two before population density reaches 16/srkm, and after that point it starts to show a positive relationship between population density and life expectancy. Other continents like Americas, Europe, and Oceania do not have an obvious positive relationship between population density and life expectancy.
+From Figure 3 we can see, only Africa and Asia show a positive relationship between population density and life expectancy. Notice that Africa experiences a negative relationship between the two before population density reaches 16/srkm, and after that point it starts to show a positive relationship between population density and life expectancy. Other continents like Americas, Europe, and Oceania do not have an obvious positive relationship between population density and life expectancy.  
 
 
 ```{r multiple plots, message = FALSE, warning = FALSE}
@@ -94,7 +96,8 @@ country_merged %>%
   ggplot(aes(pop_density, lifeExp)) +
   geom_point(alpha = 0.2) +
   geom_smooth() +
-  labs(title = 'Figure 3: Relationship between population density and life expectancy (by continents)',
+  labs(title = 'Figure 3: Relationship between population density and life expectancy 
+       (by continents)',
        x = 'Population density (per square kilometers)',
        y = 'Life expectancy') +
   scale_x_continuous(trans = 'log2') +
