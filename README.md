@@ -1,15 +1,14 @@
-# hw08
 Author: Bohan Yin
 
-## Assignment Description
-Thanks for reviewing my homework! This assignment contains two parts. Part 1 evaluate the relationship of population density with average life expectancy using the data from `gapminder`.   The API used for this part is GeoNames. There are a few things we need to do to be able to use this package to access the geonames API:
+## Project Description
+Thanks for reviewing my work! This project contains two parts. Part 1 evaluate the relationship of population density with average life expectancy using the data from `gapminder`.   The API used for this part is GeoNames. There are a few things we need to do to be able to use this package to access the geonames API:
 
 - Go to the [geonames site](http://www.geonames.org/login/) and register an account.
 - Enable the free web service on geonames site
 - Tell R your geonames username. You could run the line: `options(geonamesUsername = "my_user_name")`
 
 
-In part 2 I explored the NBA career performance of Yao Ming, a Chinese formal NBA player served in Houston Rockets. The source of NBA data is from [balldontlie API (NBA stats)](http://www.balldontlie.io/#introduction), which offers free API to access NBA related data (No API key required. Amazing isn¡¦t it). But in order to retrieve data from the website,it still requires the user to write API queries to access data, which I included the written API query in part2.
+In part 2 I explored the NBA career performance of Yao Ming, a Chinese formal NBA player served in Houston Rockets. The source of NBA data is from [balldontlie API (NBA stats)](http://www.balldontlie.io/#introduction), which offers free API to access NBA related data (No API key required. Amazing isnÂ¡Â¦t it). But in order to retrieve data from the website,it still requires the user to write API queries to access data, which I included the written API query in part2.
 
 ## Packages
 The packages required for this assignment are:  
