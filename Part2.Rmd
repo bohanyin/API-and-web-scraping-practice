@@ -1,5 +1,5 @@
 ---
-title: "hw08part2: Use data from *balldontlie API (NBA stats)* to evaluate a NBA player's performance"
+title: "part2: Use data from *balldontlie API (NBA stats)* to evaluate a NBA player's performance"
 author: "Bohan Yin"
 date: "11/24/2019"
 output: 
@@ -28,7 +28,7 @@ theme_set(theme_minimal())
 
 ## Introduction
 
-This assignment uses NBA stats from balldontlie API to evaluate a former Chinese NBA player, Yao Ming, who played for the Shanghai Sharks of the Chinese Basketball Association (CBA) and the Houston Rockets of the National Basketball Association (NBA).  
+This project uses NBA stats from balldontlie API to evaluate a former Chinese NBA player, Yao Ming, who played for the Shanghai Sharks of the Chinese Basketball Association (CBA) and the Houston Rockets of the National Basketball Association (NBA).  
 
 He is praised by the following statements from hoophall.com, which has the basketball Hall of Fame: 
 
