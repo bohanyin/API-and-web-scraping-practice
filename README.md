@@ -30,10 +30,10 @@ The packages required for this assignment are:
 - `library(kableExtra)`
 
 ## Access
-You can find my assignment here:
+You can find my projects here:
 
-- [Part1](hw08_Part1.Rmd)
-- [Part2](hw08_Part2.Rmd)
+- [Part1](Part1.Rmd)
+- [Part2](Part2.Rmd)
 
 ## Note
 If you have time, please check out the pdf files for both parts, as they have prettier outlooks!
